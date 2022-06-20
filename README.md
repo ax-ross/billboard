@@ -1,3 +1,3 @@
 # billboard
 
-## Billboard on Laravel and Vue.js
+Billboard on Laravel and Vue.js
