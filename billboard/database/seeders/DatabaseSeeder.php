@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Advertisement;
+use Database\Factories\AdvertisementFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +22,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Advertisement::factory(30)->create();
     }
 }
