@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Advertisement\StoreAdvertisementRequest;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,10 @@ class AdvertisementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdvertisementRequest $request)
     {
-        //
+        $data = $request->validated();
+        return Advertisement::create($data);
     }
 
     /**
