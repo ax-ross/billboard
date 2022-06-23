@@ -12,7 +12,7 @@
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Цена</label>
-                <input v-model="price" type="number" id="price" placeholder="Введите цену">
+                <input v-model="price" type="number" class="form-control" id="price" placeholder="Введите цену">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Описание</label>
