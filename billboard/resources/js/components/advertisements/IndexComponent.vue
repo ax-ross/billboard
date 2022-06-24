@@ -14,23 +14,23 @@
             </thead>
             <tbody>
             <template v-for="advertisement in advertisements">
-                <tr>
+                <tr :class="isEdit(advertisement.id) ? 'd-none' : ''">
                     <th scope="row">{{ advertisement.id }}</th>
                     <td>{{ advertisement.title }}</td>
                     <td>{{ advertisement.price }} Р</td>
                     <td>{{ advertisement.description.slice(0, 15) }}...</td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button @click.prevent="changeEditPersonId(advertisement.id)" class="btn btn-primary">Изменить</button> </td>
+                    <td><button @click.prevent="changeEditPersonId(advertisement.id, advertisement.title, advertisement.price, advertisement.description)" class="btn btn-primary">Изменить</button> </td>
                 </tr>
                 <tr :class="isEdit(advertisement.id) ? '' : 'd-none'">
                     <th scope="row">{{ advertisement.id }}</th>
-                    <td><input type="text" class="form-control"></td>
-                    <td><input type="number" class="form-control"></td>
-                    <td><textarea class="form-control" rows="3"></textarea></td>
+                    <td><input type="text" v-model="title" class="form-control"></td>
+                    <td><input type="number" v-model="price" class="form-control"></td>
+                    <td><textarea v-model="description" class="form-control" rows="3"></textarea></td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button class="btn btn-success">Обновить</button> </td>
+                    <td><button @click.prevent="updatePerson(advertisement.id)" class="btn btn-success">Обновить</button> </td>
                 </tr>
             </template>
             </tbody>
@@ -44,7 +44,10 @@ export default {
     data() {
         return {
             advertisements: null,
-            editPersonId: null
+            editPersonId: null,
+            title: '',
+            price: null,
+            description: ''
         }
     },
     mounted() {
@@ -58,11 +61,21 @@ export default {
                     }
                 )
         },
-        changeEditPersonId(id) {
+        changeEditPersonId(id, title, price, description) {
             this.editPersonId = id;
+            this.title = title;
+            this.price = price;
+            this.description = description;
         },
         isEdit(id) {
             return id === this.editPersonId;
+        },
+        updatePerson(id) {
+            this.editPersonId = null;
+            axios.patch(`/api/advertisements/${id}`, {title: this.title, price: this.price, description: this.description})
+                .then(res => {
+                    this.getAdvertisement();
+                })
         }
 
     }

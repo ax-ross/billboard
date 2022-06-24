@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Advertisement\StoreAdvertisementRequest;
+use App\Http\Requests\Advertisement\UpdateAdvertisementRequest;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
@@ -45,12 +46,12 @@ class AdvertisementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
-        //
+        $data = $request->validated();
+        $advertisement->update($data);
+        return $advertisement;
     }
 
     /**

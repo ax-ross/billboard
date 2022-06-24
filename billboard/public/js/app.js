@@ -5511,7 +5511,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       advertisements: null,
-      editPersonId: null
+      editPersonId: null,
+      title: '',
+      price: null,
+      description: ''
     };
   },
   mounted: function mounted() {
@@ -5525,11 +5528,26 @@ __webpack_require__.r(__webpack_exports__);
         _this.advertisements = res.data;
       });
     },
-    changeEditPersonId: function changeEditPersonId(id) {
+    changeEditPersonId: function changeEditPersonId(id, title, price, description) {
       this.editPersonId = id;
+      this.title = title;
+      this.price = price;
+      this.description = description;
     },
     isEdit: function isEdit(id) {
       return id === this.editPersonId;
+    },
+    updatePerson: function updatePerson(id) {
+      var _this2 = this;
+
+      this.editPersonId = null;
+      axios.patch("/api/advertisements/".concat(id), {
+        title: this.title,
+        price: this.price,
+        description: this.description
+      }).then(function (res) {
+        _this2.getAdvertisement();
+      });
     }
   }
 });
@@ -28470,41 +28488,50 @@ var render = function () {
         [
           _vm._l(_vm.advertisements, function (advertisement) {
             return [
-              _c("tr", [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(advertisement.id)),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(advertisement.title))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(advertisement.price) + " Р")]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    _vm._s(advertisement.description.slice(0, 15)) + "..."
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(advertisement.created_at))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(advertisement.updated_at))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      on: {
-                        click: function ($event) {
-                          $event.preventDefault()
-                          return _vm.changeEditPersonId(advertisement.id)
+              _c(
+                "tr",
+                { class: _vm.isEdit(advertisement.id) ? "d-none" : "" },
+                [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(advertisement.id)),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(advertisement.title))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(advertisement.price) + " Р")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(advertisement.description.slice(0, 15)) + "..."
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(advertisement.created_at))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(advertisement.updated_at))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.changeEditPersonId(
+                              advertisement.id,
+                              advertisement.title,
+                              advertisement.price,
+                              advertisement.description
+                            )
+                          },
                         },
                       },
-                    },
-                    [_vm._v("Изменить")]
-                  ),
-                ]),
-              ]),
+                      [_vm._v("Изменить")]
+                    ),
+                  ]),
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "tr",
@@ -28514,17 +28541,97 @@ var render = function () {
                     _vm._v(_vm._s(advertisement.id)),
                   ]),
                   _vm._v(" "),
-                  _vm._m(1, true),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.title,
+                          expression: "title",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.title },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.title = $event.target.value
+                        },
+                      },
+                    }),
+                  ]),
                   _vm._v(" "),
-                  _vm._m(2, true),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.price,
+                          expression: "price",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number" },
+                      domProps: { value: _vm.price },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.price = $event.target.value
+                        },
+                      },
+                    }),
+                  ]),
                   _vm._v(" "),
-                  _vm._m(3, true),
+                  _c("td", [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.description,
+                          expression: "description",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "3" },
+                      domProps: { value: _vm.description },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.description = $event.target.value
+                        },
+                      },
+                    }),
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(advertisement.created_at))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(advertisement.updated_at))]),
                   _vm._v(" "),
-                  _vm._m(4, true),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.updatePerson(advertisement.id)
+                          },
+                        },
+                      },
+                      [_vm._v("Обновить")]
+                    ),
+                  ]),
                 ]
               ),
             ]
@@ -28556,38 +28663,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("input", { staticClass: "form-control", attrs: { type: "number" } }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("textarea", { staticClass: "form-control", attrs: { rows: "3" } }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Обновить")]),
     ])
   },
 ]
