@@ -5506,6 +5506,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "IndexComponent",
   data: function data() {
@@ -5518,10 +5531,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getAdvertisement();
+    this.getAdvertisements();
   },
   methods: {
-    getAdvertisement: function getAdvertisement() {
+    getAdvertisements: function getAdvertisements() {
       var _this = this;
 
       axios.get('api/advertisements').then(function (res) {
@@ -5546,7 +5559,14 @@ __webpack_require__.r(__webpack_exports__);
         price: this.price,
         description: this.description
       }).then(function (res) {
-        _this2.getAdvertisement();
+        _this2.getAdvertisements();
+      });
+    },
+    deleteAdvertisement: function deleteAdvertisement(id) {
+      var _this3 = this;
+
+      axios["delete"]("api/advertisements/".concat(id)).then(function (res) {
+        _this3.getAdvertisements();
       });
     }
   }
@@ -28527,7 +28547,23 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Изменить")]
+                      [_vm._v("Изменить\n                    ")]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function ($event) {
+                            $event.preventDefault()
+                            return _vm.deleteAdvertisement(advertisement.id)
+                          },
+                        },
+                      },
+                      [_vm._v("Удалить\n                    ")]
                     ),
                   ]),
                 ]
@@ -28629,7 +28665,11 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Обновить")]
+                      [
+                        _vm._v(
+                          "\n                        Обновить\n                    "
+                        ),
+                      ]
                     ),
                   ]),
                 ]

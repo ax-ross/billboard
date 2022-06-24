@@ -21,7 +21,16 @@
                     <td>{{ advertisement.description.slice(0, 15) }}...</td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button @click.prevent="changeEditAdvertisementId(advertisement.id, advertisement.title, advertisement.price, advertisement.description)" class="btn btn-primary">Изменить</button> </td>
+                    <td>
+                        <button
+                            @click.prevent="changeEditAdvertisementId(advertisement.id, advertisement.title, advertisement.price, advertisement.description)"
+                            class="btn btn-primary">Изменить
+                        </button>
+                    </td>
+                    <td>
+                        <button @click.prevent="deleteAdvertisement(advertisement.id)" class="btn btn-danger">Удалить
+                        </button>
+                    </td>
                 </tr>
                 <tr :class="isEdit(advertisement.id) ? '' : 'd-none'">
                     <th scope="row">{{ advertisement.id }}</th>
@@ -30,7 +39,11 @@
                     <td><textarea v-model="description" class="form-control" rows="3"></textarea></td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button @click.prevent="updateAdvertisement(advertisement.id)" class="btn btn-success">Обновить</button> </td>
+                    <td>
+                        <button @click.prevent="updateAdvertisement(advertisement.id)" class="btn btn-success">
+                            Обновить
+                        </button>
+                    </td>
                 </tr>
             </template>
             </tbody>
@@ -51,10 +64,10 @@ export default {
         }
     },
     mounted() {
-        this.getAdvertisement();
+        this.getAdvertisements();
     },
     methods: {
-        getAdvertisement() {
+        getAdvertisements() {
             axios.get('api/advertisements')
                 .then(res => {
                         this.advertisements = res.data;
@@ -72,9 +85,19 @@ export default {
         },
         updateAdvertisement(id) {
             this.editAdvertisemenId = null;
-            axios.patch(`/api/advertisements/${id}`, {title: this.title, price: this.price, description: this.description})
+            axios.patch(`/api/advertisements/${id}`, {
+                title: this.title,
+                price: this.price,
+                description: this.description
+            })
                 .then(res => {
-                    this.getAdvertisement();
+                    this.getAdvertisements();
+                })
+        },
+        deleteAdvertisement(id) {
+            axios.delete(`api/advertisements/${id}`)
+                .then(res => {
+                    this.getAdvertisements();
                 })
         }
 
