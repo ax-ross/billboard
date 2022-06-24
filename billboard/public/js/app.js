@@ -5511,7 +5511,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       advertisements: null,
-      editPersonId: null,
+      editAdvertisementId: null,
       title: '',
       price: null,
       description: ''
@@ -5528,19 +5528,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.advertisements = res.data;
       });
     },
-    changeEditPersonId: function changeEditPersonId(id, title, price, description) {
-      this.editPersonId = id;
+    changeEditAdvertisementId: function changeEditAdvertisementId(id, title, price, description) {
+      this.editAdvertisemenId = id;
       this.title = title;
       this.price = price;
       this.description = description;
     },
     isEdit: function isEdit(id) {
-      return id === this.editPersonId;
+      return id === this.editAdvertisemennId;
     },
-    updatePerson: function updatePerson(id) {
+    updateAdvertisement: function updateAdvertisement(id) {
       var _this2 = this;
 
-      this.editPersonId = null;
+      this.editAdvertisemenId = null;
       axios.patch("/api/advertisements/".concat(id), {
         title: this.title,
         price: this.price,
@@ -28518,7 +28518,7 @@ var render = function () {
                         on: {
                           click: function ($event) {
                             $event.preventDefault()
-                            return _vm.changeEditPersonId(
+                            return _vm.changeEditAdvertisementId(
                               advertisement.id,
                               advertisement.title,
                               advertisement.price,
@@ -28625,7 +28625,7 @@ var render = function () {
                         on: {
                           click: function ($event) {
                             $event.preventDefault()
-                            return _vm.updatePerson(advertisement.id)
+                            return _vm.updateAdvertisement(advertisement.id)
                           },
                         },
                       },

@@ -21,7 +21,7 @@
                     <td>{{ advertisement.description.slice(0, 15) }}...</td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button @click.prevent="changeEditPersonId(advertisement.id, advertisement.title, advertisement.price, advertisement.description)" class="btn btn-primary">Изменить</button> </td>
+                    <td><button @click.prevent="changeEditAdvertisementId(advertisement.id, advertisement.title, advertisement.price, advertisement.description)" class="btn btn-primary">Изменить</button> </td>
                 </tr>
                 <tr :class="isEdit(advertisement.id) ? '' : 'd-none'">
                     <th scope="row">{{ advertisement.id }}</th>
@@ -30,7 +30,7 @@
                     <td><textarea v-model="description" class="form-control" rows="3"></textarea></td>
                     <td>{{ advertisement.created_at }}</td>
                     <td>{{ advertisement.updated_at }}</td>
-                    <td><button @click.prevent="updatePerson(advertisement.id)" class="btn btn-success">Обновить</button> </td>
+                    <td><button @click.prevent="updateAdvertisement(advertisement.id)" class="btn btn-success">Обновить</button> </td>
                 </tr>
             </template>
             </tbody>
@@ -44,7 +44,7 @@ export default {
     data() {
         return {
             advertisements: null,
-            editPersonId: null,
+            editAdvertisementId: null,
             title: '',
             price: null,
             description: ''
@@ -61,17 +61,17 @@ export default {
                     }
                 )
         },
-        changeEditPersonId(id, title, price, description) {
-            this.editPersonId = id;
+        changeEditAdvertisementId(id, title, price, description) {
+            this.editAdvertisemenId = id;
             this.title = title;
             this.price = price;
             this.description = description;
         },
         isEdit(id) {
-            return id === this.editPersonId;
+            return id === this.editAdvertisemennId;
         },
-        updatePerson(id) {
-            this.editPersonId = null;
+        updateAdvertisement(id) {
+            this.editAdvertisemenId = null;
             axios.patch(`/api/advertisements/${id}`, {title: this.title, price: this.price, description: this.description})
                 .then(res => {
                     this.getAdvertisement();
