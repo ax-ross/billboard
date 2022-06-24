@@ -32,19 +32,7 @@
                         </button>
                     </td>
                 </tr>
-                <tr :class="isEdit(advertisement.id) ? '' : 'd-none'">
-                    <th scope="row">{{ advertisement.id }}</th>
-                    <td><input type="text" v-model="title" class="form-control"></td>
-                    <td><input type="number" v-model="price" class="form-control"></td>
-                    <td><textarea v-model="description" class="form-control" rows="3"></textarea></td>
-                    <td>{{ advertisement.created_at }}</td>
-                    <td>{{ advertisement.updated_at }}</td>
-                    <td>
-                        <button @click.prevent="updateAdvertisement(advertisement.id)" class="btn btn-success">
-                            Обновить
-                        </button>
-                    </td>
-                </tr>
+                <EditComponent :advertisement="advertisement" :ref="`edit_${advertisement.id}`"></EditComponent>
             </template>
             </tbody>
         </table>
@@ -52,6 +40,7 @@
 </template>
 
 <script>
+import EditComponent from "./EditComponent";
 export default {
     name: "IndexComponent",
     data() {
@@ -66,6 +55,11 @@ export default {
     mounted() {
         this.getAdvertisements();
     },
+
+    components: {
+      EditComponent
+    },
+
     methods: {
         getAdvertisements() {
             axios.get('api/advertisements')
@@ -75,24 +69,13 @@ export default {
                 )
         },
         changeEditAdvertisementId(id, title, price, description) {
-            this.editAdvertisemenId = id;
-            this.title = title;
-            this.price = price;
-            this.description = description;
+            this.editAdvertisementId = id;
+            this.$refs[`edit_${id}`][0].title = title;
+            this.$refs[`edit_${id}`][0].price = price;
+            this.$refs[`edit_${id}`][0].description = description;
         },
         isEdit(id) {
-            return id === this.editAdvertisemennId;
-        },
-        updateAdvertisement(id) {
-            this.editAdvertisemenId = null;
-            axios.patch(`/api/advertisements/${id}`, {
-                title: this.title,
-                price: this.price,
-                description: this.description
-            })
-                .then(res => {
-                    this.getAdvertisements();
-                })
+            return id === this.editAdvertisementId;
         },
         deleteAdvertisement(id) {
             axios.delete(`api/advertisements/${id}`)
