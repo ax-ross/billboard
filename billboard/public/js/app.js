@@ -5427,6 +5427,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "CreateComponent",
   data: function data() {
@@ -5442,12 +5443,18 @@ __webpack_require__.r(__webpack_exports__);
       this.isShow = !this.isShow;
     },
     createAdvertisement: function createAdvertisement() {
+      var _this = this;
+
       axios.post('/api/advertisements', {
         title: this.title,
         price: this.price,
         description: this.description
       }).then(function (res) {
-        console.log(res);
+        _this.title = null;
+        _this.price = null;
+        _this.description = null;
+
+        _this.$parent.$refs.index.getAdvertisements();
       });
     }
   }
@@ -28315,7 +28322,11 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "container" },
-    [_c("create-component"), _vm._v(" "), _c("index-component")],
+    [
+      _c("create-component"),
+      _vm._v(" "),
+      _c("index-component", { ref: "index" }),
+    ],
     1
   )
 }

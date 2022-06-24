@@ -19,7 +19,8 @@
                 <textarea v-model="description" class="form-control" id="description" rows="3"></textarea>
             </div>
             <div>
-                <input @click.prevent="createAdvertisement" type="submit" class="btn btn-success" value="Создать объявление">
+                <input @click.prevent="createAdvertisement" type="submit" class="btn btn-success"
+                       value="Создать объявление">
             </div>
         </div>
     </div>
@@ -43,8 +44,11 @@ export default {
         },
         createAdvertisement() {
             axios.post('/api/advertisements', {title: this.title, price: this.price, description: this.description})
-                .then( res => {
-                    console.log(res);
+                .then(res => {
+                    this.title = null;
+                    this.price = null;
+                    this.description = null;
+                    this.$parent.$refs.index.getAdvertisements()
                 })
         }
     }
