@@ -1,11 +1,13 @@
 import Vue from 'vue'
-import AdvertisementComponent from "./components/AdvertisementComponent";
+import router from "./router";
+import Index from "./components/Index";
 
 require('./bootstrap');
 
 const app = new Vue({
-   el: '#app',
-   components: {
-       AdvertisementComponent
-   }
+    el: '#app',
+    components: {
+        Index
+    },
+    router
 });
