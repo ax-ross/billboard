@@ -10,6 +10,11 @@ export default new VueRouter({
             path: '/advertisements',
             component: () => import('./components/advertisements/Index'),
             name: 'advertisements.index'
+        },
+        {
+            path: '/advertisements/create',
+            component: () => import('./components/advertisements/Create'),
+            name: 'advertisements.create'
         }
     ]
 });

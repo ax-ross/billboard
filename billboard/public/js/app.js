@@ -5375,6 +5375,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index"
 });
@@ -5468,6 +5469,12 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
       return __webpack_require__.e(/*! import() */ "resources_js_components_advertisements_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/advertisements/Index */ "./resources/js/components/advertisements/Index.vue"));
     },
     name: 'advertisements.index'
+  }, {
+    path: '/advertisements/create',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_advertisements_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/advertisements/Create */ "./resources/js/components/advertisements/Create.vue"));
+    },
+    name: 'advertisements.create'
   }]
 }));
 
@@ -28020,6 +28027,15 @@ var render = function () {
         [_vm._v("Advertisements")]
       ),
       _vm._v(" "),
+      _c(
+        "router-link",
+        {
+          staticClass: "text-decoration-none",
+          attrs: { to: { name: "advertisements.create" } },
+        },
+        [_vm._v("Add")]
+      ),
+      _vm._v(" "),
       _c("router-view"),
     ],
     1
@@ -43451,7 +43467,7 @@ Vue.compile = compileToFunctions;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if (chunkId === "resources_js_components_advertisements_Index_vue") return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_advertisements_Index_vue":1,"resources_js_components_advertisements_Create_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
