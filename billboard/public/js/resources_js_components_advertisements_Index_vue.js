@@ -17,8 +17,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Index"
+  name: "Index",
+  data: function data() {
+    return {
+      advertisements: null
+    };
+  },
+  mounted: function mounted() {
+    this.getPeople();
+  },
+  methods: {
+    getPeople: function getPeople() {
+      var _this = this;
+
+      axios.get('api/advertisements').then(function (res) {
+        _this.advertisements = res.data;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -107,9 +139,42 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_vm._v("\n    Index\n")])
+  return _c("div", { staticClass: "container" }, [
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.advertisements, function (advertisement) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(advertisement.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(advertisement.price))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(advertisement.description))]),
+          ])
+        }),
+        0
+      ),
+    ]),
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Цена")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Описание")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
