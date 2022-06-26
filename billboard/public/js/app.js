@@ -5475,6 +5475,18 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
       return __webpack_require__.e(/*! import() */ "resources_js_components_advertisements_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/advertisements/Create */ "./resources/js/components/advertisements/Create.vue"));
     },
     name: 'advertisements.create'
+  }, {
+    path: '/advertisements/:id/edit',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_advertisements_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/advertisements/Edit */ "./resources/js/components/advertisements/Edit.vue"));
+    },
+    name: 'advertisements.edit'
+  }, {
+    path: '/advertisements/:id',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_advertisements_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/advertisements/Show */ "./resources/js/components/advertisements/Show.vue"));
+    },
+    name: 'advertisements.show'
   }]
 }));
 
@@ -43467,7 +43479,7 @@ Vue.compile = compileToFunctions;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_advertisements_Index_vue":1,"resources_js_components_advertisements_Create_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_advertisements_Index_vue":1,"resources_js_components_advertisements_Create_vue":1,"resources_js_components_advertisements_Edit_vue":1,"resources_js_components_advertisements_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

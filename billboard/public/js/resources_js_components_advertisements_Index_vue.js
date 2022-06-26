@@ -40,10 +40,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getPeople();
+    this.getAdvertisements();
   },
   methods: {
-    getPeople: function getPeople() {
+    getAdvertisements: function getAdvertisements() {
       var _this = this;
 
       axios.get('api/advertisements').then(function (res) {

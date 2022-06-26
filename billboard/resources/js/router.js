@@ -15,6 +15,16 @@ export default new VueRouter({
             path: '/advertisements/create',
             component: () => import('./components/advertisements/Create'),
             name: 'advertisements.create'
-        }
+        },
+        {
+            path: '/advertisements/:id/edit',
+            component: () => import('./components/advertisements/Edit'),
+            name: 'advertisements.edit'
+        },
+        {
+            path: '/advertisements/:id',
+            component: () => import('./components/advertisements/Show'),
+            name: 'advertisements.show'
+        },
     ]
 });
