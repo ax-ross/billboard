@@ -1,16 +1,16 @@
 <template>
     <div class="container mt-5">
         <div class="mb-3">
-            <input type="text" v-model="title" placeholder="Название" class="form-control">
+            <input type="text" v-model="title" placeholder="Название" class="form-control" required>
         </div>
         <div class="mb-3">
-            <input type="number" v-model="price" placeholder="999" class="form-control">
+            <input type="number" v-model="price" placeholder="999" class="form-control" required>
         </div>
         <div class="mb-3">
-            <textarea v-model="description" class="form-control" rows="3">Описание</textarea>
+            <textarea v-model="description" class="form-control" rows="3" required>Описание</textarea>
         </div>
         <div class="mb-3">
-            <input @click.prevent="store" type="submit" class="btn btn-primary" value="Добавить">
+            <input :disabled="!isDisabled" @click.prevent="store" type="submit" class="btn btn-primary" value="Добавить">
         </div>
 
     </div>
@@ -34,8 +34,13 @@ export default {
                 description: this.description
             })
                 .then(res => {
-                    this.$router.push({ name: 'advertisements.index' });
+                    this.$router.push({name: 'advertisements.index'});
                 });
+        }
+    },
+    computed: {
+        isDisabled() {
+            return this.name && this.price && this.description
         }
     }
 }
