@@ -6,6 +6,7 @@
                 <th scope="col">Название</th>
                 <th scope="col">Цена</th>
                 <th scope="col">Описание</th>
+                <th scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -13,6 +14,7 @@
                 <td>{{ advertisement.title }}</td>
                 <td>{{ advertisement.price }}</td>
                 <td>{{ advertisement.description }}</td>
+                <td><router-link :to="{ name: 'advertisements.edit', params: { id: advertisement.id } }" class="text-decoration-none btn btn-primary">Изменить</router-link></td>
             </tr>
             </tbody>
         </table>
