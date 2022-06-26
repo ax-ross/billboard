@@ -28,10 +28,10 @@ export default {
         };
     },
     mounted() {
-        this.getPeople();
+        this.getAdvertisements();
     },
     methods: {
-        getPeople() {
+        getAdvertisements() {
             axios.get('api/advertisements')
                 .then(res => {
                     this.advertisements = res.data;
