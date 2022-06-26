@@ -55,7 +55,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     isDisabled: function isDisabled() {
-      return this.name && this.price && this.description;
+      return this.title && this.price && this.description;
     }
   }
 });

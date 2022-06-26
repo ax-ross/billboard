@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         isDisabled() {
-            return this.name && this.price && this.description
+            return this.title && this.price && this.description
         }
     }
 }

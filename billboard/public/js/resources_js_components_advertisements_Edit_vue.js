@@ -67,6 +67,11 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     }
+  },
+  computed: {
+    isDisabled: function isDisabled() {
+      return this.title && this.price && this.description;
+    }
   }
 });
 
@@ -168,7 +173,7 @@ var render = function () {
           },
         ],
         staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Название" },
+        attrs: { type: "text", placeholder: "Название", required: "" },
         domProps: { value: _vm.title },
         on: {
           input: function ($event) {
@@ -192,7 +197,7 @@ var render = function () {
           },
         ],
         staticClass: "form-control",
-        attrs: { type: "number", placeholder: "999" },
+        attrs: { type: "number", placeholder: "999", required: "" },
         domProps: { value: _vm.price },
         on: {
           input: function ($event) {
@@ -218,7 +223,7 @@ var render = function () {
             },
           ],
           staticClass: "form-control",
-          attrs: { rows: "3" },
+          attrs: { rows: "3", required: "" },
           domProps: { value: _vm.description },
           on: {
             input: function ($event) {
@@ -236,7 +241,7 @@ var render = function () {
     _c("div", { staticClass: "mb-3" }, [
       _c("input", {
         staticClass: "btn btn-primary",
-        attrs: { type: "submit", value: "Обновить" },
+        attrs: { disabled: !_vm.isDisabled, type: "submit", value: "Обновить" },
         on: {
           click: function ($event) {
             $event.preventDefault()

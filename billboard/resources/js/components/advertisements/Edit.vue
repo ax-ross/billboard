@@ -1,16 +1,16 @@
 <template>
     <div class="container mt-5">
         <div class="mb-3">
-            <input type="text" v-model="title" placeholder="Название" class="form-control">
+            <input type="text" v-model="title" placeholder="Название" class="form-control" required>
         </div>
         <div class="mb-3">
-            <input type="number" v-model="price" placeholder="999" class="form-control">
+            <input type="number" v-model="price" placeholder="999" class="form-control" required>
         </div>
         <div class="mb-3">
-            <textarea v-model="description" class="form-control" rows="3">Описание</textarea>
+            <textarea v-model="description" class="form-control" rows="3" required>Описание</textarea>
         </div>
         <div class="mb-3">
-            <input @click.prevent="update" type="submit" class="btn btn-primary" value="Обновить">
+            <input :disabled="!isDisabled" @click.prevent="update" type="submit" class="btn btn-primary" value="Обновить">
         </div>
 
     </div>
@@ -48,8 +48,12 @@ export default {
                     this.$router.push({ name: 'advertisements.show', params: { id: this.$route.params.id } })
                 })
         }
+    },
+    computed: {
+        isDisabled() {
+            return this.title && this.price && this.description
+        }
     }
-
 }
 </script>
 
