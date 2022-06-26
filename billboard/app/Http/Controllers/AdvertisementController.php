@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Advertisement\StoreAdvertisementRequest;
 use App\Http\Requests\Advertisement\UpdateAdvertisementRequest;
+use App\Http\Resources\AdvertisementResource;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
@@ -12,23 +13,21 @@ class AdvertisementController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Advertisement::all();
+        return AdvertisementResource::collection(Advertisement::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreAdvertisementRequest $request)
     {
         $data = $request->validated();
-        return Advertisement::create($data);
+        $advertisement = Advertisement::create($data);
+        return new AdvertisementResource($advertisement);
     }
 
     /**
@@ -37,7 +36,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        return $advertisement;
+        return new AdvertisementResource($advertisement);
     }
 
     /**
@@ -49,7 +48,7 @@ class AdvertisementController extends Controller
     {
         $data = $request->validated();
         $advertisement->update($data);
-        return $advertisement;
+        return new AdvertisementResource($advertisement);
     }
 
     /**

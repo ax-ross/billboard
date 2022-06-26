@@ -37,7 +37,7 @@ export default {
         getAdvertisements() {
             axios.get('api/advertisements')
                 .then(res => {
-                    this.advertisements = res.data;
+                    this.advertisements = res.data.data;
                 });
         },
         deleteAdvertisement(id) {

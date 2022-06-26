@@ -27,7 +27,7 @@ export default {
         getAdvertisement() {
             axios.get(`/api/advertisements/${this.$route.params.id}`)
                 .then(res => {
-                    this.advertisement = res.data
+                    this.advertisement = res.data.data
                 })
         }
     }

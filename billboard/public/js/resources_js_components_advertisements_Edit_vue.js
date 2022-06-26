@@ -11,7 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../router */ "./resources/js/router.js");
 //
 //
 //
@@ -30,7 +29,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Edit",
   data: function data() {
@@ -48,9 +46,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/advertisements/".concat(this.$route.params.id)).then(function (res) {
-        _this.title = res.data.title;
-        _this.price = res.data.price;
-        _this.description = res.data.description;
+        _this.title = res.data.data.title;
+        _this.price = res.data.data.price;
+        _this.description = res.data.data.description;
       });
     },
     update: function update() {
@@ -61,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
         price: this.price,
         description: this.description
       }).then(function (res) {
-        _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+        _this2.$router.push({
           name: 'advertisements.show',
           params: {
             id: _this2.$route.params.id

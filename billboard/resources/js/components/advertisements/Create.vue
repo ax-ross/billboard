@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import router from "../../router";
-
 export default {
     name: "Create",
     data() {
@@ -36,7 +34,7 @@ export default {
                 description: this.description
             })
                 .then(res => {
-                    router.push({ name: 'advertisements.index' });
+                    this.$router.push({ name: 'advertisements.index' });
                 });
         }
     }

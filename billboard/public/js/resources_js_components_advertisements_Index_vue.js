@@ -50,7 +50,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('api/advertisements').then(function (res) {
-        _this.advertisements = res.data;
+        _this.advertisements = res.data.data;
       });
     },
     deleteAdvertisement: function deleteAdvertisement(id) {

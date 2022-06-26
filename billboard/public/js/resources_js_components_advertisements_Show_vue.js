@@ -40,7 +40,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/api/advertisements/".concat(this.$route.params.id)).then(function (res) {
-        _this.advertisement = res.data;
+        _this.advertisement = res.data.data;
       });
     }
   }

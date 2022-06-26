@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import router from "../../router";
-
 export default {
     name: "Edit",
     data() {
@@ -35,9 +33,9 @@ export default {
         getAdvertisement() {
             axios.get(`/api/advertisements/${this.$route.params.id}`)
                 .then(res => {
-                    this.title = res.data.title;
-                    this.price = res.data.price;
-                    this.description = res.data.description;
+                    this.title = res.data.data.title;
+                    this.price = res.data.data.price;
+                    this.description = res.data.data.description;
                 })
         },
         update() {
@@ -47,7 +45,7 @@ export default {
                 description: this.description
             })
                 .then(res => {
-                    router.push({ name: 'advertisements.show', params: { id: this.$route.params.id } })
+                    this.$router.push({ name: 'advertisements.show', params: { id: this.$route.params.id } })
                 })
         }
     }
