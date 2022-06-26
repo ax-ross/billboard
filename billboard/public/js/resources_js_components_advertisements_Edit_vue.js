@@ -54,13 +54,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     update: function update() {
+      var _this2 = this;
+
       axios.patch("/api/advertisements/".concat(this.$route.params.id), {
         title: this.title,
         price: this.price,
         description: this.description
       }).then(function (res) {
         _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
-          name: 'advertisements.show'
+          name: 'advertisements.show',
+          params: {
+            id: _this2.$route.params.id
+          }
         });
       });
     }

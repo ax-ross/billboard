@@ -32,6 +32,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   data: function data() {
@@ -147,11 +149,49 @@ var render = function () {
         "tbody",
         _vm._l(_vm.advertisements, function (advertisement) {
           return _c("tr", [
-            _c("td", [_vm._v(_vm._s(advertisement.title))]),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "text-decoration-none",
+                    attrs: {
+                      to: {
+                        name: "advertisements.show",
+                        params: { id: advertisement.id },
+                      },
+                    },
+                  },
+                  [_vm._v(_vm._s(advertisement.title))]
+                ),
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(advertisement.price))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(advertisement.description))]),
+            _vm._v(" "),
+            _c(
+              "td",
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "text-decoration-none btn btn-primary",
+                    attrs: {
+                      to: {
+                        name: "advertisements.edit",
+                        params: { id: advertisement.id },
+                      },
+                    },
+                  },
+                  [_vm._v("Изменить")]
+                ),
+              ],
+              1
+            ),
           ])
         }),
         0
@@ -171,6 +211,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Цена")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Описание")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Действия")]),
       ]),
     ])
   },

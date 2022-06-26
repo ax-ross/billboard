@@ -11,7 +11,7 @@
             </thead>
             <tbody>
             <tr v-for="advertisement in advertisements">
-                <td>{{ advertisement.title }}</td>
+                <td><router-link :to="{ name: 'advertisements.show', params: { id: advertisement.id } }" class="text-decoration-none">{{ advertisement.title }}</router-link></td>
                 <td>{{ advertisement.price }}</td>
                 <td>{{ advertisement.description }}</td>
                 <td><router-link :to="{ name: 'advertisements.edit', params: { id: advertisement.id } }" class="text-decoration-none btn btn-primary">Изменить</router-link></td>

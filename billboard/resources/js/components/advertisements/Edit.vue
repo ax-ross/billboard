@@ -47,7 +47,7 @@ export default {
                 description: this.description
             })
                 .then(res => {
-                    router.push({ name: 'advertisements.show'} )
+                    router.push({ name: 'advertisements.show', params: { id: this.$route.params.id } })
                 })
         }
     }
