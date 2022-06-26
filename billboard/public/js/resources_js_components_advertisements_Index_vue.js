@@ -34,6 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Index",
   data: function data() {
@@ -50,6 +51,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/advertisements').then(function (res) {
         _this.advertisements = res.data;
+      });
+    },
+    deleteAdvertisement: function deleteAdvertisement(id) {
+      var _this2 = this;
+
+      axios["delete"]("/api/advertisements/".concat(id)).then(function (res) {
+        _this2.getAdvertisements();
       });
     }
   }
@@ -192,6 +200,23 @@ var render = function () {
               ],
               1
             ),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.deleteAdvertisement(advertisement.id)
+                    },
+                  },
+                },
+                [_vm._v("Удалить")]
+              ),
+            ]),
           ])
         }),
         0

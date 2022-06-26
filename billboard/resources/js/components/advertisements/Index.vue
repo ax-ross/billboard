@@ -15,6 +15,7 @@
                 <td>{{ advertisement.price }}</td>
                 <td>{{ advertisement.description }}</td>
                 <td><router-link :to="{ name: 'advertisements.edit', params: { id: advertisement.id } }" class="text-decoration-none btn btn-primary">Изменить</router-link></td>
+                <td><a @click.prevent="deleteAdvertisement(advertisement.id)" href="#" class="btn btn-danger">Удалить</a></td>
             </tr>
             </tbody>
         </table>
@@ -38,6 +39,12 @@ export default {
                 .then(res => {
                     this.advertisements = res.data;
                 });
+        },
+        deleteAdvertisement(id) {
+            axios.delete(`/api/advertisements/${id}`)
+                .then(res => {
+                    this.getAdvertisements();
+                })
         }
     }
 }
