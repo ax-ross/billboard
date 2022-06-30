@@ -5486,23 +5486,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var state = {
-  advertisement: null
+  advertisement: null,
+  advertisements: null
 };
 var getters = {
   advertisement: function advertisement() {
     return state.advertisement;
+  },
+  advertisements: function advertisements() {
+    return state.advertisements;
   }
 };
 var actions = {
-  getAdvertisement: function getAdvertisement(store, id) {
+  getAdvertisement: function getAdvertisement(_ref, id) {
+    var commit = _ref.commit;
     axios.get("/api/advertisements/".concat(id)).then(function (res) {
-      store.commit('setAdvertisement', res.data.data);
+      commit('setAdvertisement', res.data.data);
+    });
+  },
+  getAdvertisements: function getAdvertisements(_ref2) {
+    var commit = _ref2.commit;
+    axios.get('api/advertisements').then(function (res) {
+      commit('setAdvertisements', res.data.data);
+    });
+  },
+  deleteAdvertisement: function deleteAdvertisement(_ref3, id) {
+    var dispatch = _ref3.dispatch;
+    axios["delete"]("/api/advertisements/".concat(id)).then(function (res) {
+      dispatch('getAdvertisements');
     });
   }
 };
 var mutations = {
   setAdvertisement: function setAdvertisement(state, advertisement) {
     state.advertisement = advertisement;
+  },
+  setAdvertisements: function setAdvertisements(state, advertisements) {
+    state.advertisements = advertisements;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({

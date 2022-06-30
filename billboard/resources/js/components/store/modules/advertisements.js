@@ -1,16 +1,30 @@
 const state = {
-    advertisement: null
+    advertisement: null,
+    advertisements: null
 }
 
 const getters = {
-    advertisement: () => state.advertisement
+    advertisement: () => state.advertisement,
+    advertisements: () => state.advertisements
 }
 
 const actions = {
-    getAdvertisement(store, id) {
+    getAdvertisement({commit}, id) {
         axios.get(`/api/advertisements/${id}`)
             .then(res => {
-                store.commit('setAdvertisement', res.data.data)
+                commit('setAdvertisement', res.data.data)
+            })
+    },
+    getAdvertisements({commit}) {
+        axios.get('api/advertisements')
+            .then(res => {
+                commit('setAdvertisements', res.data.data)
+            });
+    },
+    deleteAdvertisement({dispatch}, id) {
+        axios.delete(`/api/advertisements/${id}`)
+            .then(res => {
+                dispatch('getAdvertisements');
             })
     }
 }
@@ -18,7 +32,10 @@ const actions = {
 const mutations = {
     setAdvertisement(state, advertisement) {
         state.advertisement = advertisement
-    }
+    },
+    setAdvertisements(state, advertisements) {
+        state.advertisements = advertisements
+    },
 }
 
 export default {
