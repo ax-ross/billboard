@@ -1,13 +1,13 @@
 <template>
     <div v-if="advertisement" class="container">
         <div>
-            Название: {{ this.advertisement.title }}
+            Название: {{ advertisement.title }}
         </div>
         <div>
-            Название: {{ this.advertisement.price }}
+            Название: {{ advertisement.price }}
         </div>
         <div>
-            Название: {{ this.advertisement.description }}
+            Название: {{ advertisement.description }}
         </div>
     </div>
 </template>
@@ -15,20 +15,12 @@
 <script>
 export default {
     name: "Show",
-    data() {
-        return {
-            advertisement: null
-        }
-    },
     mounted() {
-        this.getAdvertisement();
+        this.$store.dispatch('getAdvertisement', this.$route.params.id)
     },
-    methods: {
-        getAdvertisement() {
-            axios.get(`/api/advertisements/${this.$route.params.id}`)
-                .then(res => {
-                    this.advertisement = res.data.data
-                })
+    computed: {
+        advertisement() {
+            return this.$store.getters.advertisement
         }
     }
 }

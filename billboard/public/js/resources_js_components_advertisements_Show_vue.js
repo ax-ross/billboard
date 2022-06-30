@@ -27,21 +27,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Show",
-  data: function data() {
-    return {
-      advertisement: null
-    };
-  },
   mounted: function mounted() {
-    this.getAdvertisement();
+    this.$store.dispatch('getAdvertisement', this.$route.params.id);
   },
-  methods: {
-    getAdvertisement: function getAdvertisement() {
-      var _this = this;
-
-      axios.get("/api/advertisements/".concat(this.$route.params.id)).then(function (res) {
-        _this.advertisement = res.data.data;
-      });
+  computed: {
+    advertisement: function advertisement() {
+      return this.$store.getters.advertisement;
     }
   }
 });
@@ -136,20 +127,20 @@ var render = function () {
     ? _c("div", { staticClass: "container" }, [
         _c("div", [
           _vm._v(
-            "\n        Название: " + _vm._s(this.advertisement.title) + "\n    "
+            "\n        Название: " + _vm._s(_vm.advertisement.title) + "\n    "
           ),
         ]),
         _vm._v(" "),
         _c("div", [
           _vm._v(
-            "\n        Название: " + _vm._s(this.advertisement.price) + "\n    "
+            "\n        Название: " + _vm._s(_vm.advertisement.price) + "\n    "
           ),
         ]),
         _vm._v(" "),
         _c("div", [
           _vm._v(
             "\n        Название: " +
-              _vm._s(this.advertisement.description) +
+              _vm._s(_vm.advertisement.description) +
               "\n    "
           ),
         ]),
