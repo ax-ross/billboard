@@ -5520,7 +5520,7 @@ var actions = {
       dispatch('getAdvertisements');
     });
   },
-  update: function update(_ref4, data) {
+  updateAdvertisement: function updateAdvertisement(_ref4, data) {
     _objectDestructuringEmpty(_ref4);
 
     axios.patch("/api/advertisements/".concat(data.id), {

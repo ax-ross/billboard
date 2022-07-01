@@ -29,7 +29,7 @@ const actions = {
                 dispatch('getAdvertisements');
             })
     },
-    update({}, data) {
+    updateAdvertisement({}, data) {
         axios.patch(`/api/advertisements/${data.id}`, {
             title: data.title,
             price: data.price,

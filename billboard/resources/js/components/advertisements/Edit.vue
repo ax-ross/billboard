@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5">
+    <div class="container mt-5" v-if="advertisement">
         <div class="mb-3">
             <input type="text" v-model="advertisement.title" placeholder="Название" class="form-control" required>
         </div>
@@ -10,7 +10,7 @@
             <textarea v-model="advertisement.description" class="form-control" rows="3" required>Описание</textarea>
         </div>
         <div class="mb-3">
-            <input :disabled="!isDisabled" @click.prevent="$store.dispatch('update', {id: advertisement.id, title: advertisement.title, price: advertisement.price, description: advertisement.description })" type="submit" class="btn btn-primary" value="Обновить">
+            <input :disabled="!isDisabled" @click.prevent="$store.dispatch('updateAdvertisement', advertisement)" type="submit" class="btn btn-primary" value="Обновить">
         </div>
 
     </div>

@@ -130,101 +130,109 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mt-5" }, [
-    _c("div", { staticClass: "mb-3" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.advertisement.title,
-            expression: "advertisement.title",
-          },
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Название", required: "" },
-        domProps: { value: _vm.advertisement.title },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.advertisement, "title", $event.target.value)
-          },
-        },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.advertisement.price,
-            expression: "advertisement.price",
-          },
-        ],
-        staticClass: "form-control",
-        attrs: { type: "number", placeholder: "999", required: "" },
-        domProps: { value: _vm.advertisement.price },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.advertisement, "price", $event.target.value)
-          },
-        },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c(
-        "textarea",
-        {
-          directives: [
+  return _vm.advertisement
+    ? _c("div", { staticClass: "container mt-5" }, [
+        _c("div", { staticClass: "mb-3" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.advertisement.title,
+                expression: "advertisement.title",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Название", required: "" },
+            domProps: { value: _vm.advertisement.title },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.advertisement, "title", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.advertisement.price,
+                expression: "advertisement.price",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", placeholder: "999", required: "" },
+            domProps: { value: _vm.advertisement.price },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.advertisement, "price", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c(
+            "textarea",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.advertisement.description,
-              expression: "advertisement.description",
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.advertisement.description,
+                  expression: "advertisement.description",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: { rows: "3", required: "" },
+              domProps: { value: _vm.advertisement.description },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.advertisement,
+                    "description",
+                    $event.target.value
+                  )
+                },
+              },
             },
-          ],
-          staticClass: "form-control",
-          attrs: { rows: "3", required: "" },
-          domProps: { value: _vm.advertisement.description },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.advertisement, "description", $event.target.value)
+            [_vm._v("Описание")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("input", {
+            staticClass: "btn btn-primary",
+            attrs: {
+              disabled: !_vm.isDisabled,
+              type: "submit",
+              value: "Обновить",
             },
-          },
-        },
-        [_vm._v("Описание")]
-      ),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "mb-3" }, [
-      _c("input", {
-        staticClass: "btn btn-primary",
-        attrs: { disabled: !_vm.isDisabled, type: "submit", value: "Обновить" },
-        on: {
-          click: function ($event) {
-            $event.preventDefault()
-            return _vm.$store.dispatch("update", {
-              id: _vm.advertisement.id,
-              title: _vm.advertisement.title,
-              price: _vm.advertisement.price,
-              description: _vm.advertisement.description,
-            })
-          },
-        },
-      }),
-    ]),
-  ])
+            on: {
+              click: function ($event) {
+                $event.preventDefault()
+                return _vm.$store.dispatch(
+                  "updateAdvertisement",
+                  _vm.advertisement
+                )
+              },
+            },
+          }),
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
