@@ -5485,6 +5485,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../router */ "./resources/js/router.js");
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
 var state = {
   advertisement: null,
   advertisements: null
@@ -5514,6 +5518,22 @@ var actions = {
     var dispatch = _ref3.dispatch;
     axios["delete"]("/api/advertisements/".concat(id)).then(function (res) {
       dispatch('getAdvertisements');
+    });
+  },
+  update: function update(_ref4, data) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios.patch("/api/advertisements/".concat(data.id), {
+      title: data.title,
+      price: data.price,
+      description: data.description
+    }).then(function (res) {
+      _router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+        name: 'advertisements.show',
+        params: {
+          id: data.id
+        }
+      });
     });
   }
 };

@@ -31,46 +31,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Edit",
-  data: function data() {
-    return {
-      title: null,
-      price: null,
-      description: null
-    };
-  },
   mounted: function mounted() {
-    this.getAdvertisement();
-  },
-  methods: {
-    getAdvertisement: function getAdvertisement() {
-      var _this = this;
-
-      axios.get("/api/advertisements/".concat(this.$route.params.id)).then(function (res) {
-        _this.title = res.data.data.title;
-        _this.price = res.data.data.price;
-        _this.description = res.data.data.description;
-      });
-    },
-    update: function update() {
-      var _this2 = this;
-
-      axios.patch("/api/advertisements/".concat(this.$route.params.id), {
-        title: this.title,
-        price: this.price,
-        description: this.description
-      }).then(function (res) {
-        _this2.$router.push({
-          name: 'advertisements.show',
-          params: {
-            id: _this2.$route.params.id
-          }
-        });
-      });
-    }
+    this.$store.dispatch('getAdvertisement', this.$route.params.id);
   },
   computed: {
     isDisabled: function isDisabled() {
-      return this.title && this.price && this.description;
+      return this.advertisement.title && this.advertisement.price && this.advertisement.description;
+    },
+    advertisement: function advertisement() {
+      return this.$store.getters.advertisement;
     }
   }
 });
@@ -168,19 +137,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.title,
-            expression: "title",
+            value: _vm.advertisement.title,
+            expression: "advertisement.title",
           },
         ],
         staticClass: "form-control",
         attrs: { type: "text", placeholder: "Название", required: "" },
-        domProps: { value: _vm.title },
+        domProps: { value: _vm.advertisement.title },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.title = $event.target.value
+            _vm.$set(_vm.advertisement, "title", $event.target.value)
           },
         },
       }),
@@ -192,19 +161,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.price,
-            expression: "price",
+            value: _vm.advertisement.price,
+            expression: "advertisement.price",
           },
         ],
         staticClass: "form-control",
         attrs: { type: "number", placeholder: "999", required: "" },
-        domProps: { value: _vm.price },
+        domProps: { value: _vm.advertisement.price },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.price = $event.target.value
+            _vm.$set(_vm.advertisement, "price", $event.target.value)
           },
         },
       }),
@@ -218,19 +187,19 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.description,
-              expression: "description",
+              value: _vm.advertisement.description,
+              expression: "advertisement.description",
             },
           ],
           staticClass: "form-control",
           attrs: { rows: "3", required: "" },
-          domProps: { value: _vm.description },
+          domProps: { value: _vm.advertisement.description },
           on: {
             input: function ($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.description = $event.target.value
+              _vm.$set(_vm.advertisement, "description", $event.target.value)
             },
           },
         },
@@ -245,7 +214,12 @@ var render = function () {
         on: {
           click: function ($event) {
             $event.preventDefault()
-            return _vm.update.apply(null, arguments)
+            return _vm.$store.dispatch("update", {
+              id: _vm.advertisement.id,
+              title: _vm.advertisement.title,
+              price: _vm.advertisement.price,
+              description: _vm.advertisement.description,
+            })
           },
         },
       }),

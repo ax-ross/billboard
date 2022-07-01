@@ -1,3 +1,5 @@
+import router from "../../../router";
+
 const state = {
     advertisement: null,
     advertisements: null
@@ -25,6 +27,16 @@ const actions = {
         axios.delete(`/api/advertisements/${id}`)
             .then(res => {
                 dispatch('getAdvertisements');
+            })
+    },
+    update({}, data) {
+        axios.patch(`/api/advertisements/${data.id}`, {
+            title: data.title,
+            price: data.price,
+            description: data.description
+        })
+            .then(res => {
+                router.push({ name: 'advertisements.show', params: { id: data.id } })
             })
     }
 }

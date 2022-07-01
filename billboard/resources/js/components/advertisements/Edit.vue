@@ -1,16 +1,16 @@
 <template>
     <div class="container mt-5">
         <div class="mb-3">
-            <input type="text" v-model="title" placeholder="Название" class="form-control" required>
+            <input type="text" v-model="advertisement.title" placeholder="Название" class="form-control" required>
         </div>
         <div class="mb-3">
-            <input type="number" v-model="price" placeholder="999" class="form-control" required>
+            <input type="number" v-model="advertisement.price" placeholder="999" class="form-control" required>
         </div>
         <div class="mb-3">
-            <textarea v-model="description" class="form-control" rows="3" required>Описание</textarea>
+            <textarea v-model="advertisement.description" class="form-control" rows="3" required>Описание</textarea>
         </div>
         <div class="mb-3">
-            <input :disabled="!isDisabled" @click.prevent="update" type="submit" class="btn btn-primary" value="Обновить">
+            <input :disabled="!isDisabled" @click.prevent="$store.dispatch('update', {id: advertisement.id, title: advertisement.title, price: advertisement.price, description: advertisement.description })" type="submit" class="btn btn-primary" value="Обновить">
         </div>
 
     </div>
@@ -19,39 +19,16 @@
 <script>
 export default {
     name: "Edit",
-    data() {
-        return {
-            title: null,
-            price: null,
-            description: null
-        }
-    },
     mounted() {
-        this.getAdvertisement();
-    },
-    methods: {
-        getAdvertisement() {
-            axios.get(`/api/advertisements/${this.$route.params.id}`)
-                .then(res => {
-                    this.title = res.data.data.title;
-                    this.price = res.data.data.price;
-                    this.description = res.data.data.description;
-                })
-        },
-        update() {
-            axios.patch(`/api/advertisements/${this.$route.params.id}`, {
-                title: this.title,
-                price: this.price,
-                description: this.description
-            })
-                .then(res => {
-                    this.$router.push({ name: 'advertisements.show', params: { id: this.$route.params.id } })
-                })
-        }
+        this.$store.dispatch('getAdvertisement', this.$route.params.id);
     },
     computed: {
         isDisabled() {
-            return this.title && this.price && this.description
+            return this.advertisement.title && this.advertisement.price && this.advertisement.description
+        },
+
+        advertisement() {
+            return this.$store.getters.advertisement
         }
     }
 }
